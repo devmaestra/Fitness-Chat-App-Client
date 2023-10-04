@@ -13,7 +13,6 @@ function App() {
       <ProfilePic />
       <Nav />
       {/* <Footer /> */}
-
     </div>
   );
 }
