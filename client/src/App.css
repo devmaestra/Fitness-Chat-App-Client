@@ -1,3 +1,84 @@
 .App {
   text-align: center;
 }
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #124559;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.header p {
+  margin: 0;
+  padding: 5px 0 10px 0;
+  background-color: #598392;
+}
+
+#fancyTitle {
+  font-family: 'Mr De Haviland', cursive;
+  padding: 0;
+  margin: 30px 0 10px 0;
+  font-size: 6em;
+  font-weight: 100;
+  /* letter-spacing: .01em; */
+  line-height: 80%;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #01161E;
+  color: white;
+  text-align: center;
+}
+
+/* Place the navbar at the bottom of the page, and make it stick */
+.navbar {
+  background-color: #01161E;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Center the Nav Items */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 0rem 0.25rem; /* spacing between nav buttons */
+  text-decoration: none;
+  font-size: 17px;
+  border-radius: 20px;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #b4eaff;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
+  background-color: #124559;
+  color: white;
+}
