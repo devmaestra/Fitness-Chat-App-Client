@@ -1,17 +1,18 @@
-import "./App.css";
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import './App.css';
+import React from 'react';
 import ProfilePic from "./components/profile/ProfilePic";
-import ForgotPassword from "./components/auth/forgotPassword/ForgotPassword";
+
+// import Footer from './components/footer/Footer';
+import Header from './components/header/Header';
+import Nav from './components/nav/Nav';
 
 function App() {
   return (
     <div className="App">
-      Swoulmates
+      <Header />
       <ProfilePic />
-      <Routes>
-        <Route path="/forgot-password" element={<ForgotPassword />}></Route>
-      </Routes>
+      <Nav />
+      {/* <Footer /> */}
     </div>
   );
 }
