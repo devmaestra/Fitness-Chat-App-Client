@@ -1,8 +1,14 @@
 import React from 'react'
 
-function Nav(props) {
+function Nav() {
   return (
-    <div>Nav</div>
+        <div className="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#matches">Matches</a>
+            <a href="#convos">Convos</a>
+            <a href="#profile">Profile</a>
+            <a href="#friends">Friends</a>
+        </div>
   )
 }
 
