@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Button, Form, Input } from 'reactstrap';
-
+import { baseURL } from '../../utils';
 
 function ProfilePic(props) {
 
@@ -8,9 +8,33 @@ function ProfilePic(props) {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(e);
       const file = e.target[0].files[0];
       console.log(file);
+
+      // fetch to server endpoint to get the link (from s3)
+
+      // const url = await fetch("http://127.0.0.1:4001")
+      
+      
+      const awsURL = await fetch (`${baseURL}/geturl`).then(res => res.json()).catch(err => console.log(err))
+
+
+      // fetch to s3 to upload the image (PUT)
+      await fetch (awsURL, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "multipart/form-data"
+        },
+        body: file
+      })
+
+    //   const imgURL = url.split("?")[0];
+    //  const img = document.createElement("img")
+    //  img.src = imgURL
+    //  document.body.appendChild(img)
+
+      // fetch to our servers db to post the link
+      
     };
 
 
