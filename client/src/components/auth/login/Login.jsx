@@ -35,11 +35,12 @@ function Login({updateToken}) {
             })
 
             const data = await res.json();
+            console.log(data);
            
 
             if(data.message === 'Success!') {
                 updateToken(data.token)
-                navigate('/') // navigate to all rooms
+                navigate('/user/matches') // navigate to all rooms
             } else {
                 alert(data.message)
             }
