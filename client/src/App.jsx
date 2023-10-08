@@ -3,6 +3,7 @@ import Header from './components/header/Header';
 import Nav from './components/nav/Nav';
 import React from 'react';
 import Auth from './/components/auth/Auth';
+import Matches from './components/matches/Matches';
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -28,10 +29,16 @@ function App() {
       <Header />
 
       <Routes>
-      <Route
-    path='/'
-    element={<Auth updateToken={updateToken} />}
-  />
+
+        <Route
+          path='/'
+          element={<Auth updateToken={updateToken} />}
+        />
+        <Route
+          path='/matches'
+          element={<Matches token={sessionToken} />}
+        />
+      
       </Routes>
       <Nav />
 
