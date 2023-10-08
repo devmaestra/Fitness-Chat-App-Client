@@ -13,23 +13,23 @@ function Nav() {
     <div className="navbar">
       <a href="#home" className="active">
         <FontAwesomeIcon icon={faHome} />
-        <br></br> Home
+        <br></br>Home
       </a>
       <a href="#matches">
         <FontAwesomeIcon icon={faUsers} />
-        <br></br> Matches
+        <br></br>Matches
       </a>
       <a href="#convos">
         <FontAwesomeIcon icon={faComments} />
-        <br></br> Convos
+        <br></br>Convos
       </a>
       <a href="#profile">
         <FontAwesomeIcon icon={faUser} />
-        <br></br> Profile
+        <br></br>Profile
       </a>
       <a href="#friends">
         <FontAwesomeIcon icon={faUserFriends} />
-        <br></br> Friends
+        <br></br>Friends
       </a>
     </div>
   );

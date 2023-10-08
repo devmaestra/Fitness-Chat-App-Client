@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Button } from "reactstrap";
 import { baseURL } from "../../utils";
 import CardTemplate from "../card/CardTemplate";
 
@@ -33,9 +34,10 @@ function Matches(props) {
 
   return (
     <div>
-      <h2>Your Matches</h2>
-      <h3>From nearby</h3>
-      <button onClick={fetchMatches}>Match Me</button>
+      <h2>Your Nearby Matches</h2>
+      <Button color="success" size="lg" onClick={fetchMatches}>
+        <strong>Match Me</strong>
+      </Button>
       <div className="card-container">
         {/* Map through matchedUsers and render a Card for each user */}
         {matchedUsers.map((user) => (
