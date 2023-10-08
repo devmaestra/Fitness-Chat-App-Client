@@ -92,9 +92,12 @@ function Signup(props) {
         <FormGroup>
             <Label>Zipcode</Label>
             <Input
+            type='text'
+            pattern='[0-9]{5}'
+            maxLength={5}
             innerRef={locationZipRef}
-            placeholder='Enter your zipcode'
-            type='number'
+            placeholder='Enter your 5-digit zipcode'
+            // type='number'
             />
         </FormGroup>
         <FullButton>

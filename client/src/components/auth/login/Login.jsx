@@ -40,7 +40,8 @@ function Login({ updateToken }) {
 
             if (data.message === 'Success!') {
                 updateToken(data.token)
-                navigate('/') // navigate to all rooms
+                console.log('Navigating to /matches'); 
+                navigate('/matches')
             } else {
                 alert(data.message)
             }
