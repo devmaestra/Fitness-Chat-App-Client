@@ -6,6 +6,7 @@ import Auth from './/components/auth/Auth';
 import Matches from './components/matches/Matches';
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Logout from './components/auth/logout/Logout';
 
 // import Footer from './components/footer/Footer';
 
@@ -27,7 +28,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-
+      {
+      sessionToken !== '' ?
+      <Logout setSessionToken={setSessionToken}/> : null
+    }
       <Routes>
 
         <Route
