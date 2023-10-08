@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { baseURL } from "../../utils";
-
+import React, { useEffect, useState } from 'react';
+import { baseURL } from '../../utils';
 import {
   MDBCol,
   MDBContainer,
