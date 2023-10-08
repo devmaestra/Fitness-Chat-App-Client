@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { baseURL } from '../../utils';
-import Card from "../card/Card";
+import { baseURL } from "../../utils";
+import CardTemplate from "../card/CardTemplate";
 
 function Matches(props) {
   const [matchedUsers, setMatchedUsers] = useState([]);
@@ -12,10 +12,10 @@ function Matches(props) {
     try {
       // Make an HTTP GET request to fetch matched users
       const response = await axios.get(`${baseURL}/user/matches`, {
-      headers: {
-        Authorization: `${props.token}`, // Include the token in the "Authorization" header
-      },
-    });
+        headers: {
+          Authorization: `${props.token}`, // Include the token in the "Authorization" header
+        },
+      });
 
       console.log("Response from server:", response.data); // Log the response data
 
@@ -39,13 +39,12 @@ function Matches(props) {
       <div className="card-container">
         {/* Map through matchedUsers and render a Card for each user */}
         {matchedUsers.map((user) => (
-          <Card 
-          key={user._id} 
-          userImage={user.userImage} 
-          username={user.username} 
-          locationZip={user.locationZip} 
-          cityName={user.cityName} 
-          
+          <CardTemplate
+            key={user._id}
+            userImage={user.userImage}
+            username={user.username}
+            locationZip={user.locationZip}
+            cityName={user.cityName}
           />
         ))}
       </div>
