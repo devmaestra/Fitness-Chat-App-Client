@@ -3,20 +3,20 @@ import FullButton from '../../buttons/FullButton';
 import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
 import { useNavigate } from 'react-router-dom';
 
-function Login({updateToken}) {
+function Login({ updateToken }) {
 
     const emailRef = useRef();
     const passwordRef = useRef();
-    
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        
+
 
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
-        
+
 
         //needs to match postman body
         let body = JSON.stringify({
@@ -38,46 +38,46 @@ function Login({updateToken}) {
             console.log(data);
            
 
-            if(data.message === 'Success!') {
+            if (data.message === 'Success!') {
                 updateToken(data.token)
                 console.log('Navigating to /matches'); 
                 navigate('/matches')
             } else {
                 alert(data.message)
             }
-            
+
         } catch (err) {
             console.log(err.message);
         }
     }
 
-  return (
-    <>
-    <h2>Login</h2>
-    <Form onSubmit={handleSubmit}>
-    <FormGroup>
-        <Label>Email</Label>
-            <Input
-            innerRef={emailRef}
-            type='email'
-            placeholder='email'
-            />
-    </FormGroup>
+    return (
+        <>
+            <h2>Login</h2>
+            <Form onSubmit={handleSubmit}>
+                <FormGroup>
+                    <Label>Email</Label>
+                    <Input
+                        innerRef={emailRef}
+                        type='email'
+                        placeholder='email'
+                    />
+                </FormGroup>
 
-    <FormGroup>
-        <Label>Password</Label>
-            <Input
-            innerRef={passwordRef}
-            type='password'
-            placeholder='Enter Password'
-            />
-    </FormGroup>
-    <FullButton>
-    <Button type='submit'>Login</Button>
-    </FullButton>
-    </Form>
-    </>
-  )
+                <FormGroup>
+                    <Label>Password</Label>
+                    <Input
+                        innerRef={passwordRef}
+                        type='password'
+                        placeholder='Enter Password'
+                    />
+                </FormGroup>
+                <FullButton>
+                    <Button type='submit'>Login</Button>
+                </FullButton>
+            </Form>
+        </>
+    )
 }
 
 export default Login

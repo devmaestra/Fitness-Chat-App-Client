@@ -4,6 +4,7 @@ import Nav from './components/nav/Nav';
 import React from 'react';
 import Auth from './/components/auth/Auth';
 import Matches from './components/matches/Matches';
+import Profile from './components/profile/EditProfile'
 import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Logout from './components/auth/logout/Logout';
@@ -20,10 +21,10 @@ function App() {
   }
 
   useEffect(() => {
-    if(localStorage.getItem('token')) {
-    setSessionToken(localStorage.getItem('token'))
-  }
-  },[])
+    if (localStorage.getItem('token')) {
+      setSessionToken(localStorage.getItem('token'))
+    }
+  }, [])
 
   return (
     <div className="App">
@@ -42,7 +43,10 @@ function App() {
           path='/matches'
           element={<Matches token={sessionToken} />}
         />
-      
+        <Route
+          path='/profile'
+          element={<Profile token={sessionToken} />}
+        />
       </Routes>
       <Nav />
 
