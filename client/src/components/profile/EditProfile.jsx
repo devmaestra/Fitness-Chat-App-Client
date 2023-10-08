@@ -39,12 +39,6 @@ export default function EditProfile(props) {
 
     return (
         <div className="userProfile">
-{/*             {user.map((user) => (
-                <Card
-                    key={user._id}
-                    userImage={user.userImage}
-                    username={user.username}
-                    locationZip={user.locationZip}/>))} */}
             <section style={{ backgroundColor: '#fff0f5'}}>
                 <MDBContainer className="py-5">
                     <MDBRow>
