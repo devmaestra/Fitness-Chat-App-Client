@@ -1,172 +1,124 @@
-import React, { useRef } from 'react';
-import { Button, Form, FormGroup, Label, FormText, Input } from 'reactstrap';
+import React, { useEffect, useState } from 'react';
 import { baseURL } from '../../utils';
+import Card from "../card/Card";
+import {
+    MDBCol,
+    MDBContainer,
+    MDBRow,
+    MDBCard,
+    MDBCardText,
+    MDBCardBody,
+    MDBCardImage,
+    MDBBtn
+} from 'mdb-react-ui-kit';
 
-function EditProfile(props) {
+export default function EditProfile(props) {
 
-/*     const emailRef = useRef();
-    const passwordRef = useRef();
+    const [user, setUser] = useState([]);
+    const fetchUser = async () => {
+        const url = `${baseURL}/profile`;
 
-    const navigate = useNavigate();
+        try {
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+            const res = await fetch(url);
+            const data = await res.json();
 
-        const url = 'http://localhost:4001/user/profile'
-    } */
+            // console.log(data);
+            setUser(data.getProfile)
+
+        } catch (err) {
+            console.error(err.message)
+        }
+    }
+
+    useEffect(() => {
+        if (props.token) {
+            fetchUser()
+        }
+    }, [props.token])
 
     return (
-
-        <Form /* onSubmit={handleSubmit} */>
-            <FormGroup>
-                <Label for="exampleEmail">
-                    Email
-                </Label>
-                <Input
-                    id="exampleEmail"
-                    name="email"
-                    placeholder="with a placeholder"
-                    type="email"
-                />
-            </FormGroup>
-            <FormGroup>
-                <Label for="examplePassword">
-                    Password
-                </Label>
-                <Input
-                    id="examplePassword"
-                    name="password"
-                    placeholder="password placeholder"
-                    type="password"
-                />
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleSelect">
-                    Select
-                </Label>
-                <Input
-                    id="exampleSelect"
-                    name="select"
-                    type="select"
-                >
-                    <option>
-                        1
-                    </option>
-                    <option>
-                        2
-                    </option>
-                    <option>
-                        3
-                    </option>
-                    <option>
-                        4
-                    </option>
-                    <option>
-                        5
-                    </option>
-                </Input>
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleSelectMulti">
-                    Select Multiple
-                </Label>
-                <Input
-                    id="exampleSelectMulti"
-                    multiple
-                    name="selectMulti"
-                    type="select"
-                >
-                    <option>
-                        1
-                    </option>
-                    <option>
-                        2
-                    </option>
-                    <option>
-                        3
-                    </option>
-                    <option>
-                        4
-                    </option>
-                    <option>
-                        5
-                    </option>
-                </Input>
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleText">
-                    Text Area
-                </Label>
-                <Input
-                    id="exampleText"
-                    name="text"
-                    type="textarea"
-                />
-            </FormGroup>
-            <FormGroup>
-                <Label for="exampleFile">
-                    File
-                </Label>
-                <Input
-                    id="exampleFile"
-                    name="file"
-                    type="file"
-                />
-                <FormText>
-                    This is some placeholder block-level help text for the above input. It‘s a bit lighter and easily wraps to a new line.
-                </FormText>
-            </FormGroup>
-            <FormGroup tag="fieldset">
-                <legend>
-                    Radio Buttons
-                </legend>
-                <FormGroup check>
-                    <Input
-                        name="radio1"
-                        type="radio"
-                    />
-                    {' '}
-                    <Label check>
-                        Option one is this and that—be sure to include why it‘s great
-                    </Label>
-                </FormGroup>
-                <FormGroup check>
-                    <Input
-                        name="radio1"
-                        type="radio"
-                    />
-                    {' '}
-                    <Label check>
-                        Option two can be something else and selecting it will deselect option one
-                    </Label>
-                </FormGroup>
-                <FormGroup
-                    check
-                    disabled
-                >
-                    <Input
-                        disabled
-                        name="radio1"
-                        type="radio"
-                    />
-                    {' '}
-                    <Label check>
-                        Option three is disabled
-                    </Label>
-                </FormGroup>
-            </FormGroup>
-            <FormGroup check>
-                <Input type="checkbox" />
-                {' '}
-                <Label check>
-                    Check me out
-                </Label>
-            </FormGroup>
-            <Button>
-                Submit
-            </Button>
-        </Form>
-    )
-}
-
-export default EditProfile
+        <div className="userProfile">
+{/*             {user.map((user) => (
+                <Card
+                    key={user._id}
+                    userImage={user.userImage}
+                    username={user.username}
+                    locationZip={user.locationZip}/>))} */}
+            <section style={{ backgroundColor: '#fff0f5'}}>
+                <MDBContainer className="py-5">
+                    <MDBRow>
+                        <MDBCol lg="4">
+                            <MDBCard className="mb-4">
+                                <MDBCardBody className="text-center">
+                                    <MDBCardImage
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                        alt="avatar"
+                                        className="rounded-circle"
+                                        style={{ width: '150px' }}
+                                        fluid />
+                                    <p className="text-muted mb-1">Full Stack Developer</p>
+                                    <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
+                                    <div className="d-flex justify-content-center mb-2">
+                                        <MDBBtn>Edit</MDBBtn>
+                                        <MDBBtn outline className="ms-3">Delete</MDBBtn>
+                                    </div>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                        <MDBCol lg="8">
+                            <MDBCard className="mb-4">
+                                <MDBCardBody>
+                                    <MDBRow>
+                                        <MDBCol sm="3">
+                                            <MDBCardText>Full Name</MDBCardText>
+                                        </MDBCol>
+                                        <MDBCol sm="9">
+                                            <MDBCardText className="text-muted">Johnatan Smith</MDBCardText>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow>
+                                        <MDBCol sm="3">
+                                            <MDBCardText>Email</MDBCardText>
+                                        </MDBCol>
+                                        <MDBCol sm="9">
+                                            <MDBCardText className="text-muted">example@example.com</MDBCardText>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow>
+                                        <MDBCol sm="3">
+                                            <MDBCardText>Phone</MDBCardText>
+                                        </MDBCol>
+                                        <MDBCol sm="9">
+                                            <MDBCardText className="text-muted">(097) 234-5678</MDBCardText>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow>
+                                        <MDBCol sm="3">
+                                            <MDBCardText>Mobile</MDBCardText>
+                                        </MDBCol>
+                                        <MDBCol sm="9">
+                                            <MDBCardText className="text-muted">(098) 765-4321</MDBCardText>
+                                        </MDBCol>
+                                    </MDBRow>
+                                    <hr />
+                                    <MDBRow>
+                                        <MDBCol sm="3">
+                                            <MDBCardText>Address</MDBCardText>
+                                        </MDBCol>
+                                        <MDBCol sm="9">
+                                            <MDBCardText className="text-muted">Bay Area, San Francisco, CA</MDBCardText>
+                                        </MDBCol>
+                                    </MDBRow>
+                                </MDBCardBody>
+                            </MDBCard>
+                        </MDBCol>
+                    </MDBRow>
+                </MDBContainer>
+            </section>
+        </div>
+    );
+};
