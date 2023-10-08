@@ -88,3 +88,20 @@
   background-color: #124559;
   color: white;
 }
+
+.card1 {
+  max-width: 300px;
+  border: 1px solid #124559;
+  border-radius: 4%;
+  /* background-color: #78abbe; */
+}
+
+.card1 img {
+  border: 1px solid #ddd;
+  border-radius: 4%;
+  padding: 5px;
+  width: 150px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
