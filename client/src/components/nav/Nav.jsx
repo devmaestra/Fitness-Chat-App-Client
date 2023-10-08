@@ -5,7 +5,7 @@ import { faHome, faUsers, faComments, faUser, faUserFriends } from '@fortawesome
 function Nav() {
   return (
     <div className="navbar">
-      <a href="/home" className="active">
+      <a href="/" className="active">
         <FontAwesomeIcon icon={faHome} /> Home
       </a>
       <a href="/matches">
