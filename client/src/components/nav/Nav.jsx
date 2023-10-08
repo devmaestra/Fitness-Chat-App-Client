@@ -5,19 +5,19 @@ import { faHome, faUsers, faComments, faUser, faUserFriends } from '@fortawesome
 function Nav() {
   return (
     <div className="navbar">
-      <a href="#home" className="active">
+      <a href="/home" className="active">
         <FontAwesomeIcon icon={faHome} /> Home
       </a>
-      <a href="#matches">
+      <a href="/matches">
         <FontAwesomeIcon icon={faUsers} /> Matches
       </a>
-      <a href="#convos">
+      <a href="/convos">
         <FontAwesomeIcon icon={faComments} /> Convos
       </a>
-      <a href="#profile">
+      <a href="/profile">
         <FontAwesomeIcon icon={faUser} /> Profile
       </a>
-      <a href="#friends">
+      <a href="/friends">
         <FontAwesomeIcon icon={faUserFriends} /> Friends
       </a>
     </div>
