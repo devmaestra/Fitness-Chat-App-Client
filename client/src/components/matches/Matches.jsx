@@ -34,7 +34,7 @@ function Matches(props) {
   return (
     <div>
       <h2>Your Matches</h2>
-      <h3>From nearby</h3>
+      {/* <h3>From nearby localRadiusCities</h3> */}
       <button onClick={fetchMatches}>Match Me</button>
       <div className="card-container">
         {/* Map through matchedUsers and render a Card for each user */}
