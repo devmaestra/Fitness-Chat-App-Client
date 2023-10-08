@@ -1,11 +1,17 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUsers, faComments, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faUsers,
+  faComments,
+  faUser,
+  faUserFriends,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Nav() {
   return (
     <div className="navbar">
-      <a href="/home" className="active">
+      <a href="/" className="active">
         <FontAwesomeIcon icon={faHome} />
         <br />Home
       </a>
