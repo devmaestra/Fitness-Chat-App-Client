@@ -97,18 +97,20 @@
   /* background-color: #78abbe; */
 /* } */
 
-/* .card1 img {
-  border: 1px solid #ddd;
+.card-image {
+  /* border: 1px solid #ddd;
   border-radius: 4%;
-  padding: 5px;
+  padding: 5px; */
   width: 150px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-} */ 
+  /* display: block; */
+  margin: auto;
+}
 
 .card-container {
-  padding: 10px;
+  margin: 10px 5px;
+  padding: 15px;
   width: 100;
+  display: flex;
+  flex-wrap: wrap;
 }
 

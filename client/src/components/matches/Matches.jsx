@@ -46,7 +46,7 @@ function Matches(props) {
             userImage={user.userImage}
             username={user.username}
             locationZip={user.locationZip}
-            cityName={user.cityName}
+            cityName={user.cityName} //add to user signup?
           />
         ))}
       </div>
