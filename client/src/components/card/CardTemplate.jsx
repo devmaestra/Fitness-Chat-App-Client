@@ -16,11 +16,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function CardTemplate({ username, userImage, locationZip, cityName }) {
   return (
     <div>
-      <Row classname="">
+      <Row classname="row gx-5" style={{ display: "inline" }}>
         <Col>
-          <Card style={{ margin: "10px" }}>
+          <Card
+            classname="shadow-4"
+            style={{
+              margin: "10px",
+              background: "#D9D9D9",
+              boxShadow: "0 2px 15px -3px",
+            }}
+          >
             <CardImg
-              className="card-image"
+              className="mt-3 bg-image hover-zoom mx-3 shadow-4-strong rounded-6"
               style={{
                 width: "250px",
                 height: "250px",
@@ -36,10 +43,12 @@ function CardTemplate({ username, userImage, locationZip, cityName }) {
               <CardText>{cityName}</CardText>
               <Button
                 className="chat-btn"
-                color="success"
                 onClick="PLACEHOLDER for chat conversation"
+                style={{
+                  background: "#284B63",
+                }}
               >
-                Chat with {username}!
+                <strong>Chat with {username}!</strong>
               </Button>
             </CardBody>
           </Card>

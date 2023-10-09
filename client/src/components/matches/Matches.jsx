@@ -34,9 +34,17 @@ function Matches(props) {
 
   return (
     <div>
-      <h2>Your Nearby Matches</h2>
-      <Button color="success" size="lg" onClick={fetchMatches}>
-        <strong>Match Me</strong>
+      <br />
+      <h1 style={{ color: "#284B63", textShadow: "3px 3px 3px #D9D9D9" }}>
+        Your Nearby Matches
+      </h1>
+      <br />
+      <Button
+        style={{ background: "#3C6E71", boxShadow: "1px 1px 10px 1px grey" }}
+        size="lg"
+        onClick={fetchMatches}
+      >
+        <strong>Find My SwoulMates!</strong>
       </Button>
       <div className="card-container">
         {/* Map through matchedUsers and render a Card for each user */}
