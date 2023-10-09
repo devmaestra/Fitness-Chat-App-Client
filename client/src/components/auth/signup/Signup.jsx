@@ -8,6 +8,7 @@ function Signup(props) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const locationZipRef = useRef();
+  const bioRef = useRef();
 
   const navigate = useNavigate();
 
@@ -18,12 +19,14 @@ function Signup(props) {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const locationZip = locationZipRef.current.value;
+    const bio = bioRef.current.value;
 
     let bodyObj = JSON.stringify({
       username: username,
       email: email,
       password: password,
       locationZip: locationZip,
+      bio: bio,
     });
 
     const url = `http://localhost:4001/user/signup`;
@@ -65,9 +68,10 @@ function Signup(props) {
   return (
     <>
       <h2 style={{ color: "#284B63", textShadow: "3px 3px 3px #D9D9D9" }}>
-        Signup
+        <strong>Signup</strong>
       </h2>
-      <Form onSubmit={handleSubmit}>
+      <br />
+      <Form className="form-inline" onSubmit={handleSubmit}>
         <FormGroup>
           <Label>Username</Label>
           <Input innerRef={usernameRef} placeholder="Enter Username" />
@@ -97,6 +101,18 @@ function Signup(props) {
             innerRef={locationZipRef}
             placeholder="Enter your 5-digit zipcode"
             // type='number'
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Bio Line</Label>
+          <p style={{ fontSize: "small", text: "muted" }}>
+            This will be seen by people you are matched with, so add your
+            favorite fitness activites here!
+          </p>
+          <Input
+            innerRef={bioRef}
+            placeholder="Enter a short bio (150 characters or less)"
+            type="text"
           />
         </FormGroup>
         <FullButton>

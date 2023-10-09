@@ -19,6 +19,7 @@ function Auth(props) {
     backgroundColor: "#D9D9D9",
     color: "#3C6E71",
     borderColor: "#3C6E71",
+    fontWeight: "bold",
   };
 
   const displayForm = () => {

@@ -44,6 +44,11 @@
   line-height: 80%;
 }
 
+.form-inline {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
 
 .footer {
   position: fixed;

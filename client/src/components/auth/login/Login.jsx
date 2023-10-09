@@ -59,12 +59,13 @@ function Login({ updateToken }) {
   return (
     <>
       <h2 style={{ color: "#284B63", textShadow: "3px 3px 3px #D9D9D9" }}>
-        Login
+        <strong>Login</strong>
       </h2>
-      <Form onSubmit={handleSubmit}>
+      <br />
+      <Form className="form-inline center" onSubmit={handleSubmit}>
         <FormGroup>
-          <Label>Email</Label>
-          <Input innerRef={emailRef} type="email" placeholder="email" />
+          <Label className="">Email</Label>
+          <Input innerRef={emailRef} type="email" placeholder="Email" />
         </FormGroup>
 
         <FormGroup>
