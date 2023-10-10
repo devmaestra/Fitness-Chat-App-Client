@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  CardGroup,
   Card,
   CardImg,
   CardBody,
@@ -13,7 +12,7 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function CardTemplate({ username, userImage, locationZip, cityName }) {
+function CardTemplate({ username, userImage, locationZip, activityBio }) {
   return (
     <div>
       <Row classname="row gx-5" style={{ display: "inline" }}>
@@ -40,7 +39,9 @@ function CardTemplate({ username, userImage, locationZip, cityName }) {
               <CardSubtitle className="mb-2" tag="h4">
                 Nearby in: {locationZip}
               </CardSubtitle>
-              <CardText>{cityName}</CardText>
+              <CardText style={{ width: "200px", marginLeft: "25px" }}>
+                {activityBio}
+              </CardText>
               <Button
                 className="chat-btn"
                 onClick="PLACEHOLDER for chat conversation"
