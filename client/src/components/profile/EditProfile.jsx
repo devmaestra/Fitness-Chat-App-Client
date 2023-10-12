@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { baseURL } from '../../utils';
-import Card from "../card/Card";
 import {
     MDBCol,
     MDBContainer,
