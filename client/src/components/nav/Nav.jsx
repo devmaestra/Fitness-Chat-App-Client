@@ -1,36 +1,44 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faUsers,
-  faComments,
-  faUser,
-  faUserFriends,
-} from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faUsers, faComments, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+// import ConversationIndex from '../conversations/ConversationIndex';
+import ConversationTable from '../conversations/ConversationTable';
+import { useNavigate, Link, Route, Routes } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 function Nav() {
+  const navigate = useNavigate();
+
+  const handleMyConvosClick = () => {
+    // Use navigate to redirect to /myconversations
+    navigate('/myconversations');
+  };
+
   return (
     <div className="navbar">
-      <a href="/" className="active">
-        <FontAwesomeIcon icon={faHome} />
-        <br />Home
-      </a>
-      <a href="/matches">
-        <FontAwesomeIcon icon={faUsers} />
-        <br />Matches
-      </a>
-      <a href="/convos">
-        <FontAwesomeIcon icon={faComments} />
-        <br />Convos
-      </a>
-      <a href="/profile">
-        <FontAwesomeIcon icon={faUser} />
-        <br />Profile
-      </a>
-      <a href="/friends">
-        <FontAwesomeIcon icon={faUserFriends} />
-        <br />Friends
-      </a>
+
+      <Link to="/" className="active">
+        <FontAwesomeIcon icon={faHome} /> Home
+      </Link>
+
+      <Link to="/matches">
+        <FontAwesomeIcon icon={faUsers} /> Matches
+      </Link>
+
+      <Link to="/myconversations">
+        <Button onClick={handleMyConvosClick}>
+        
+        <FontAwesomeIcon icon={faComments} /> Convos
+        </Button>
+      </Link>
+
+      <Link to="/profile">
+        <FontAwesomeIcon icon={faUser} /> Profile
+      </Link>
+
+      <Link to="/friends">
+        <FontAwesomeIcon icon={faUserFriends} /> Friends
+      </Link>
     </div>
   );
 }

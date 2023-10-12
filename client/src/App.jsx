@@ -8,6 +8,9 @@ import Profile from "./components/profile/EditProfile";
 import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Logout from "./components/auth/logout/Logout";
+// import ConversationIndex from './components/conversations/ConversationIndex';
+import ConversationTable from "./components/conversations/ConversationTable";
+import Footer from "./components/footer/Footer";
 
 // import Footer from './components/footer/Footer';
 
@@ -31,14 +34,16 @@ function App() {
       {sessionToken !== "" ? (
         <Logout setSessionToken={setSessionToken} />
       ) : null}
+      {sessionToken !== '' ?  <Nav /> : null}
       <Routes>
         <Route path="/" element={<Auth updateToken={updateToken} />} />
         <Route path="/matches" element={<Matches token={sessionToken} />} />
         <Route path="/profile" element={<Profile token={sessionToken} />} />
+        <Route path='/myconversations' element={<ConversationTable token={sessionToken} />} />
       </Routes>
-      <Nav />
-
-      {/* <Footer /> */}
+      
+      {sessionToken !== '' ?  null : <Footer />}
+      
     </div>
   );
 }
