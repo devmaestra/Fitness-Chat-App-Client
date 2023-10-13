@@ -18,8 +18,8 @@ function App() {
     localStorage.setItem('token', newToken);
     setSessionToken(newToken);
   };
+ 
   
-
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setSessionToken(localStorage.getItem('token'));

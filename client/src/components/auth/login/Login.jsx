@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'
-import FullButton from '../../buttons/FullButton';
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
+import React, { useRef } from "react";
+import FullButton from "../../buttons/FullButton";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
 function Login({ updateToken }) {
 
@@ -52,34 +52,45 @@ function Login({ updateToken }) {
             console.log(err.message);
         }
     }
+  };
 
-    return (
-        <>
-            <h2>Login</h2>
-            <Form onSubmit={handleSubmit}>
-                <FormGroup>
-                    <Label>Email</Label>
-                    <Input
-                        innerRef={emailRef}
-                        type='email'
-                        placeholder='email'
-                    />
-                </FormGroup>
+  const style = {
+    margin: ".5rem",
+    marginTop: "10px",
+    marginBottom: "5px",
+    backgroundColor: "#D9D9D9",
+    color: "#3C6E71",
+    borderColor: "#3C6E71",
+  };
 
-                <FormGroup>
-                    <Label>Password</Label>
-                    <Input
-                        innerRef={passwordRef}
-                        type='password'
-                        placeholder='Enter Password'
-                    />
-                </FormGroup>
-                <FullButton>
-                    <Button type='submit'>Login</Button>
-                </FullButton>
-            </Form>
-        </>
-    )
+  return (
+    <>
+      <h2 style={{ color: "#284B63", textShadow: "3px 3px 3px #D9D9D9" }}>
+        <strong>Login</strong>
+      </h2>
+      <br />
+      <Form className="form-inline center" onSubmit={handleSubmit}>
+        <FormGroup>
+          <Label className="">Email</Label>
+          <Input innerRef={emailRef} type="email" placeholder="Email" />
+        </FormGroup>
+
+        <FormGroup>
+          <Label>Password</Label>
+          <Input
+            innerRef={passwordRef}
+            type="password"
+            placeholder="Enter Password"
+          />
+        </FormGroup>
+        <FullButton>
+          <Button type="submit" style={style}>
+            <strong>Login</strong>
+          </Button>
+        </FullButton>
+      </Form>
+    </>
+  );
 }
 
-export default Login
+export default Login;
