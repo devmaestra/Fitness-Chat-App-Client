@@ -1,38 +1,55 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { useNavigate } from "react-router-dom";
+
 import {
   faHome,
   faUsers,
   faComments,
   faUser,
-  faUserFriends,
+  // faUserFriends,
+  // faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-function Nav() {
+import Logout from '../auth/logout/Logout'; // Import the Logout component
+import { NavLink } from 'react-router-dom';
+
+
+function Nav({ setSessionToken }) {
+
+  // const navigate = useNavigate();
+
+  // const handleMyConvosClick = () => {
+  //   // Use navigate to redirect to /myconversations
+  //   navigate('/myconversations');
+  // };
+
   return (
     <div className="navbar">
-      <a href="/" className="active">
+      <NavLink to="/" exact="true" activeclassname="active">
         <FontAwesomeIcon icon={faHome} />
         <br />Home
-      </a>
-      <a href="/matches">
+      </NavLink>
+      <NavLink to="/matches" activeclassname="active">
         <FontAwesomeIcon icon={faUsers} />
         <br />Matches
-      </a>
-      <a href="/convos">
+      </NavLink>
+      <NavLink to="/myconversations" activeclassname="active">
         <FontAwesomeIcon icon={faComments} />
         <br />Convos
-      </a>
-      <a href="/profile">
+      </NavLink>
+      <NavLink to="/profile" activeclassname="active">
         <FontAwesomeIcon icon={faUser} />
         <br />Profile
-      </a>
-      <a href="/friends">
-        <FontAwesomeIcon icon={faUserFriends} />
-        <br />Friends
-      </a>
+      </NavLink>
+      {setSessionToken ? (
+        <NavLink to="/" activeclassname="active">
+          <Logout setSessionToken={setSessionToken} />
+        </NavLink>
+      ) : null}
     </div>
   );
 }
+
 
 export default Nav;

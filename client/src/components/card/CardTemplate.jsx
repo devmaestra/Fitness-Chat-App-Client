@@ -13,20 +13,39 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function CardTemplate({ username, userImage, locationZip, cityName }) {
+function CardTemplate({
+  username,
+  userImage,
+  locationZip,
+  cityName,
+  isSelected,
+  onClick,
+  onCreateConvoClick,
+  onCancelClick,
+}) {
   return (
     <div>
-      <Row classname="">
+      <Row className="row gx-5" style={{ display: "inline" }}>
         <Col>
-          <Card style={{ margin: "10px" }}>
+          <Card
+            className="shadow-4"
+            style={{
+              margin: "10px",
+              background: "#D9D9D9",
+              boxShadow: "0 2px 15px -3px",
+            }}
+          >
             <CardImg
-              className="card-image"
+              className="mt-3 bg-image hover-zoom mx-3 shadow-4-strong rounded-6"
               style={{
                 width: "250px",
                 height: "250px",
+                objectFit: "cover",
+                objectPosition: "top"
               }}
               src={userImage || "/assets/User-Profile-PNG-Image.png"}
               alt={username}
+              onClick={onClick}
             />
             <CardBody>
               <CardTitle tag="h1">{username}</CardTitle>
@@ -36,11 +55,16 @@ function CardTemplate({ username, userImage, locationZip, cityName }) {
               <CardText>{cityName}</CardText>
               <Button
                 className="chat-btn"
-                color="success"
-                onClick="PLACEHOLDER for chat conversation"
+                color={isSelected ? "success" : "primary"}
+                onClick={isSelected ? onCreateConvoClick : onClick}
               >
-                Chat with {username}!
+                {isSelected ? "Create Convo" : `Chat with ${username}!`}
               </Button>
+              {isSelected && (
+                <Button color="danger" onClick={onCancelClick}>
+                  Cancel
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Col>

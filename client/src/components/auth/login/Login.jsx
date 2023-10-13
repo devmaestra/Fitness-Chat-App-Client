@@ -36,6 +36,8 @@ function Login({ updateToken }) {
 
             const data = await res.json();
             console.log(data);
+            console.log('User ID is:', data.user._id);
+            console.log('User Name is:', data.user.username);
            
 
             if (data.message === 'Success!') {
