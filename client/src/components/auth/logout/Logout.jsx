@@ -1,33 +1,30 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { Button } from "reactstrap";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 function Logout({ setSessionToken }) {
   const navigate = useNavigate();
 
   const signout = () => {
-    localStorage.removeItem("token"); // clears out localStorage
-    setSessionToken(""); // resets out state to an empty string
-    navigate("/"); // rouths us back to Auth
+    if (typeof setSessionToken === 'function') {
+      localStorage.removeItem('token');
+      setSessionToken('');
+      navigate('/');
+    }
   };
 
   const style = {
-    float: "right",
-    margin: ".5rem",
-    marginLeft: "-60px",
-    marginTop: "-40px",
-    marginBottom: "5px",
-    backgroundColor: "#D9D9D9",
-    color: "#3C6E71",
-    borderColor: "#3C6E71",
+    float: 'right',
+    margin: '.5rem',
   };
 
   return (
-    <>
-      <Button color="info" outline style={style} onClick={signout}>
-        <strong>Signout</strong>
-      </Button>
-    </>
+    <div onClick={signout} style={style} className="logout-button">
+      <FontAwesomeIcon icon={faSignOutAlt} />
+      <br />
+      Signout
+    </div>
   );
 }
 

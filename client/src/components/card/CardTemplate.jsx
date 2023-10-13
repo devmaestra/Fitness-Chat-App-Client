@@ -12,13 +12,23 @@ import {
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-function CardTemplate({ username, userImage, locationZip, activityBio }) {
+function CardTemplate({
+  username,
+  userImage,
+  locationZip,
+  cityName,
+  activityBio,
+  isSelected,
+  onClick,
+  onCreateConvoClick,
+  onCancelClick,
+}) {
   return (
     <div>
-      <Row classname="row gx-5" style={{ display: "inline" }}>
+      <Row className="row gx-5" style={{ display: "inline" }}>
         <Col>
           <Card
-            classname="shadow-4"
+            className="shadow-4"
             style={{
               margin: "10px",
               background: "#D9D9D9",
@@ -30,27 +40,34 @@ function CardTemplate({ username, userImage, locationZip, activityBio }) {
               style={{
                 width: "250px",
                 height: "250px",
+                objectFit: "cover",
+                objectPosition: "top"
               }}
               src={userImage || "/assets/User-Profile-PNG-Image.png"}
               alt={username}
+              onClick={onClick}
             />
             <CardBody>
               <CardTitle tag="h1">{username}</CardTitle>
               <CardSubtitle className="mb-2" tag="h4">
                 Nearby in: {locationZip}
               </CardSubtitle>
+              <CardText>{cityName}</CardText>
               <CardText style={{ width: "200px", marginLeft: "25px" }}>
                 {activityBio}
               </CardText>
               <Button
                 className="chat-btn"
-                onClick="PLACEHOLDER for chat conversation"
-                style={{
-                  background: "#284B63",
-                }}
+                color={isSelected ? "success" : "primary"}
+                onClick={isSelected ? onCreateConvoClick : onClick}
               >
-                <strong>Chat with {username}!</strong>
+                {isSelected ? "Create Convo" : `Chat with ${username}!`}
               </Button>
+              {isSelected && (
+                <Button color="danger" onClick={onCancelClick}>
+                  Cancel
+                </Button>
+              )}
             </CardBody>
           </Card>
         </Col>

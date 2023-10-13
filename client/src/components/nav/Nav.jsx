@@ -1,46 +1,55 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUsers, faComments, faUser, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-// import ConversationIndex from '../conversations/ConversationIndex';
-import ConversationTable from '../conversations/ConversationTable';
-import { useNavigate, Link, Route, Routes } from 'react-router-dom';
-import { Button } from 'reactstrap';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { useNavigate } from "react-router-dom";
 
-function Nav() {
-  const navigate = useNavigate();
+import {
+  faHome,
+  faUsers,
+  faComments,
+  faUser,
+  // faUserFriends,
+  // faSignOutAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
-  const handleMyConvosClick = () => {
-    // Use navigate to redirect to /myconversations
-    navigate('/myconversations');
-  };
+import Logout from '../auth/logout/Logout'; // Import the Logout component
+import { NavLink } from 'react-router-dom';
+
+
+function Nav({ setSessionToken }) {
+
+  // const navigate = useNavigate();
+
+  // const handleMyConvosClick = () => {
+  //   // Use navigate to redirect to /myconversations
+  //   navigate('/myconversations');
+  // };
 
   return (
     <div className="navbar">
-
-      <Link to="/" className="active">
-        <FontAwesomeIcon icon={faHome} /> Home
-      </Link>
-
-      <Link to="/matches">
-        <FontAwesomeIcon icon={faUsers} /> Matches
-      </Link>
-
-      <Link to="/myconversations">
-        <Button onClick={handleMyConvosClick}>
-        
-        <FontAwesomeIcon icon={faComments} /> Convos
-        </Button>
-      </Link>
-
-      <Link to="/profile">
-        <FontAwesomeIcon icon={faUser} /> Profile
-      </Link>
-
-      <Link to="/friends">
-        <FontAwesomeIcon icon={faUserFriends} /> Friends
-      </Link>
+      <NavLink to="/" exact="true" activeclassname="active">
+        <FontAwesomeIcon icon={faHome} />
+        <br />Home
+      </NavLink>
+      <NavLink to="/matches" activeclassname="active">
+        <FontAwesomeIcon icon={faUsers} />
+        <br />Matches
+      </NavLink>
+      <NavLink to="/myconversations" activeclassname="active">
+        <FontAwesomeIcon icon={faComments} />
+        <br />Convos
+      </NavLink>
+      <NavLink to="/profile" activeclassname="active">
+        <FontAwesomeIcon icon={faUser} />
+        <br />Profile
+      </NavLink>
+      {setSessionToken ? (
+        <NavLink to="/" activeclassname="active">
+          <Logout setSessionToken={setSessionToken} />
+        </NavLink>
+      ) : null}
     </div>
   );
 }
+
 
 export default Nav;
