@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  CardGroup,
   Card,
   CardImg,
   CardBody,
@@ -18,6 +17,7 @@ function CardTemplate({
   userImage,
   locationZip,
   cityName,
+  activityBio,
   isSelected,
   onClick,
   onCreateConvoClick,
@@ -53,6 +53,9 @@ function CardTemplate({
                 Nearby in: {locationZip}
               </CardSubtitle>
               <CardText>{cityName}</CardText>
+              <CardText style={{ width: "200px", marginLeft: "25px" }}>
+                {activityBio}
+              </CardText>
               <Button
                 className="chat-btn"
                 color={isSelected ? "success" : "primary"}
