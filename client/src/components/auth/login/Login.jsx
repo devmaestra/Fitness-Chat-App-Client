@@ -5,53 +5,53 @@ import { useNavigate } from "react-router-dom";
 
 function Login({ updateToken }) {
 
-    const emailRef = useRef();
-    const passwordRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-
-        const email = emailRef.current.value;
-        const password = passwordRef.current.value;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
 
-        //needs to match postman body
-        let body = JSON.stringify({
-            email, password
-        })
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
 
-        const url = 'http://localhost:4001/user/login'
 
-        try {
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: new Headers({
-                    "Content-Type": 'application/json' // thing to append to
-                }),
-                body: body
-            })
+    //needs to match postman body
+    let body = JSON.stringify({
+      email,
+      password,
+    });
 
-            const data = await res.json();
-            console.log(data);
-            console.log('User ID is:', data.user._id);
-            console.log('User Name is:', data.user.username);
-           
+    const url = "http://localhost:4001/user/login";
 
-            if (data.message === 'Success!') {
-                updateToken(data.token)
-                console.log('Navigating to /matches'); 
-                navigate('/matches')
-            } else {
-                alert(data.message)
-            }
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: new Headers({
+          "Content-Type": "application/json", // thing to append to
+        }),
+        body: body,
+      });
 
-        } catch (err) {
-            console.log(err.message);
-        }
-    };
+      const data = await res.json();
+      console.log(data);
+      console.log("User ID is:", data.user._id);
+      console.log("User Name is:", data.user.username);
+
+      if (data.message === "Success!") {
+        updateToken(data.token);
+        console.log("Navigating to /matches");
+        navigate("/matches");
+      } else {
+        alert(data.message);
+      }
+
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   const style = {
     margin: ".5rem",
