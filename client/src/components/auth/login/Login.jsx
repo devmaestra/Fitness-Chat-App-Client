@@ -51,8 +51,7 @@ function Login({ updateToken }) {
         } catch (err) {
             console.log(err.message);
         }
-    }
-  };
+    };
 
   const style = {
     margin: ".5rem",
