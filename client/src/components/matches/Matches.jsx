@@ -126,6 +126,7 @@ function Matches(props) {
             onCreateConvoClick={() => createConversation(user)}
             onCancelClick={() => selectUser(null)} // This cancels the selection
             activityBio={user.activityBio} //add to user signup?
+            
           />
         ))}
       </div>
