@@ -1,27 +1,56 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/header/Header';
 import Nav from './components/nav/Nav';
 import Auth from './components/auth/Auth';
 import Matches from './components/matches/Matches';
-import Profile from './components/profile/EditProfile';
-import { useState, useEffect } from 'react';
+import Profile from './components/profile/EditProfile'; // edit this
 import { Route, Routes } from 'react-router-dom';
-// import ConversationIndex from './components/conversations/ConversationIndex';
 import ConversationTable from "./components/conversations/ConversationTable";
+import { baseURL } from './components/environments/index';
 
 function App() {
   const [sessionToken, setSessionToken] = useState('');
+  const [userData, setUserData] = useState(null);
 
   const updateToken = newToken => {
-    console.log("Updating token with:", newToken);
     localStorage.setItem('token', newToken);
     setSessionToken(newToken);
   };
-  
+
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch(`${baseURL}/user/loggeduser`, {
+        method: 'GET',
+        headers: {
+          Authorization: sessionToken,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch user data. Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem('token')) {
       setSessionToken(localStorage.getItem('token'));
+
+      fetchUserData()
+        .then(userData => {
+          if (userData) {
+            setUserData(userData);
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching user data:', error);
+        });
     }
   }, []);
 
@@ -32,10 +61,13 @@ function App() {
         <Route path="/" element={<Auth updateToken={updateToken} />} />
         <Route path="/matches" element={<Matches token={sessionToken} />} />
         <Route path="/profile" element={<Profile token={sessionToken} />} />
-        <Route path='/myconversations' element={<ConversationTable token={sessionToken} />} />
+        <Route
+          path="/myconversations"
+          element={<ConversationTable token={sessionToken} userData={userData} />}
+        />
       </Routes>
-      {sessionToken !== '' ?  <Nav /> : null}
-      <Nav setSessionToken={setSessionToken} /> {/* Pass setSessionToken to Nav */}
+      {sessionToken !== '' ? <Nav /> : null}
+      <Nav setSessionToken={setSessionToken} />
     </div>
   );
 }

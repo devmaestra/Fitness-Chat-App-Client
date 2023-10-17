@@ -14,6 +14,7 @@ function Matches(props) {
   const [matchedUsers, setMatchedUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null); // To store the selected user
   const [showCreateButton, setShowCreateButton] = useState(false);
+  
   const navigate = useNavigate();
 
 
@@ -46,11 +47,37 @@ function Matches(props) {
     }
   };
 
-  // Function to handle creating a new conversation
-  const createConversation = async () => {
-    
-    if (selectedUserId) {
-      try {
+  // Function to handle creating a new conversation or using an existing one
+const createConversation = async () => {
+  if (selectedUserId) {
+    try {
+      // Check if a conversation already exists between the two users
+      const response = await axios.get(
+        `${baseURL}/conversation/byusers`,
+        {
+          params: {
+            user1: userId,
+            user2: selectedUserId,
+          },
+          headers: {
+            Authorization: `${props.token}`,
+          },
+        }
+      );
+
+      console.log("Response from checking existing conversation:", response.data);
+
+      if (response.data && response.data.conversation) {
+        // An existing conversation was found, you can use it for further actions
+        console.log("Using an existing conversation:", response.data.conversation);
+
+        // Handle any further actions here, such as redirecting to the conversation page.
+        navigate('/myconversations');
+
+        // Clear the selected user and hide the "Create Convo" button
+        setSelectedUserId(null);
+        setShowCreateButton(false);
+      } else {
         // Create the title by concatenating usernames
         const title = `${userName} with ${
           matchedUsers.find((user) => user._id === selectedUserId).username
@@ -72,19 +99,21 @@ function Matches(props) {
 
         console.log("Response from creating conversation:", response.data);
 
-        navigate('/myconversations')
-
         // Handle any further actions here, such as redirecting to the new conversation page.
-        // You can use response.data.newConversation to access the created conversation.
+        navigate('/myconversations');
 
         // Clear the selected user and hide the "Create Convo" button
         setSelectedUserId(null);
         setShowCreateButton(false);
-      } catch (error) {
-        console.error("Error creating conversation:", error);
       }
+    } catch (error) {
+      console.error("Error creating or checking conversation:", error);
+
+      // Navigate to the /myconversations route when an error occurs
+      navigate('/myconversations');
     }
-  };
+  }
+};
 
   useEffect(() => {
     // Call the fetchMatches function when the component mounts

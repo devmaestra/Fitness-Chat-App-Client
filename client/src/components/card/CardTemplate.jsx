@@ -61,7 +61,7 @@ function CardTemplate({
                 color={isSelected ? "success" : "primary"}
                 onClick={isSelected ? onCreateConvoClick : onClick}
               >
-                {isSelected ? "Create Convo" : `Chat with ${username}!`}
+                {isSelected ? "Convo" : `Chat with ${username}!`}
               </Button>
               {isSelected && (
                 <Button color="danger" onClick={onCancelClick}>
