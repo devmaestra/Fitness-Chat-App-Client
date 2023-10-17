@@ -12,16 +12,17 @@ import {
 } from "reactstrap";
 import FullButton from "../buttons/FullButton";
 import ProfilePic from "./ProfilePic";
-import { baseURL } from "../environments";
+// import { baseURL } from "../environments";
 
 function EditProfile(props) {
+  const { userId } = useParams();
   const usernameRef = useRef();
   const emailRef = useRef();
   const locationZipRef = useRef();
   const activityBioRef = useRef();
-  const { id } = useParams();
+  // const { id } = useParams();
 
-  const url = `${baseURL}/${id}/edit`;
+  const url = `http://localhost:4001/user/edit`;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -120,13 +121,6 @@ function EditProfile(props) {
       <br />
       <Container>
         <Row>
-          <Col md="4">
-            <FullButton>
-              <Button onClick={() => navigate("/profile")}>
-                Back to Profile Home
-              </Button>
-            </FullButton>
-          </Col>
           <Col md="8">
             <ProfilePic />
             <Form onSubmit={handleSubmit}>
@@ -178,6 +172,13 @@ function EditProfile(props) {
                 </Button>
               </FullButton>
             </Form>
+          </Col>
+          <Col md="4">
+            <FullButton>
+              <Button onClick={() => navigate("/profile")}>
+                Back to Profile Home
+              </Button>
+            </FullButton>
           </Col>
         </Row>
       </Container>

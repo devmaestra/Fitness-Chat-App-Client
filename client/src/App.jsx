@@ -65,9 +65,8 @@ function App() {
         <Route path="/matches" element={<Matches token={sessionToken} />} />
         <Route path="/profile" element={<Profile token={sessionToken} />} />
         <Route
-          path="/edit-profile"
-          component={<EditProfile />}
-          token={sessionToken}
+          path="/profile/edit-profile"
+          component={<EditProfile token={sessionToken} />}
         />
         <Route
           path="/myconversations"

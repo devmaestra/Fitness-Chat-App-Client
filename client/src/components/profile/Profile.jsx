@@ -10,7 +10,7 @@ import {
   Card,
   Button,
 } from "reactstrap";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Route } from "react-router-dom";
 import EditProfile from "./EditProfile";
 
 function Profile(props) {
@@ -52,9 +52,10 @@ function Profile(props) {
   //   navigate("/profile");
   // }, [navigate]);
 
-  const navigateToEditProfile = () => {
-    navigate("/edit-profile");
-  };
+  // const navigateToEditProfile = () => {
+  //   navigate("/edit-profile");
+  // };
+  // setSelectedUserId(null);
 
   return (
     <div>
@@ -65,11 +66,11 @@ function Profile(props) {
             <Col lg="4">
               <ProfileCardTemplate
                 token={props.token}
-                // key={user._id}
-                // userImage={user.userImage}
+                key={user._id}
+                userImage={user.userImage}
                 username={user.username}
                 locationZip={user.locationZip}
-                // activityBio ={user.activityBio}
+                activityBio={user.activityBio}
               />
             </Col>
             <Col lg="8">
@@ -117,8 +118,8 @@ function Profile(props) {
                     </Col>
                   </Row>
                   <hr />
-                  <Button onClick={<EditProfile />}>
-                    <Link to="/edit-profile">Edit Profile</Link>
+                  <Button>
+                    <Link to="/profile/edit-profile">Edit Profile</Link>
                   </Button>
                 </CardBody>
               </Card>
