@@ -4,23 +4,26 @@ import Header from './components/header/Header';
 import Nav from './components/nav/Nav';
 import Auth from './components/auth/Auth';
 import Matches from './components/matches/Matches';
-import Profile from './components/profile/EditProfile'; // edit this
+import Profile from "./components/profile/Profile";
 import { Route, Routes } from 'react-router-dom';
 import ConversationTable from "./components/conversations/ConversationTable";
 import { baseURL } from './components/environments/index';
-
+import EditProfile from "./components/profile/EditProfile";
+    
 function App() {
   const [sessionToken, setSessionToken] = useState('');
   const [userData, setUserData] = useState(null);
 
   const updateToken = newToken => {
     localStorage.setItem('token', newToken);
+
     setSessionToken(newToken);
   };
 
   const fetchUserData = async () => {
     try {
       const response = await fetch(`${baseURL}/user/loggeduser`, {
+
         method: 'GET',
         headers: {
           Authorization: sessionToken,
@@ -62,11 +65,17 @@ function App() {
         <Route path="/matches" element={<Matches token={sessionToken} />} />
         <Route path="/profile" element={<Profile token={sessionToken} />} />
         <Route
+          path="/profile/edit-profile"
+          component={<EditProfile token={sessionToken} />}
+        />
+        <Route
           path="/myconversations"
-          element={<ConversationTable token={sessionToken} userData={userData} />}
+          element={
+            <ConversationTable token={sessionToken} userData={userData} />
+          }
         />
       </Routes>
-      {sessionToken !== '' ? <Nav /> : null}
+      {sessionToken !== "" ? <Nav /> : null}
       <Nav setSessionToken={setSessionToken} />
     </div>
   );
