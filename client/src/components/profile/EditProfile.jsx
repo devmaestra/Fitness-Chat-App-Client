@@ -1,27 +1,54 @@
-import React, { useEffect, useState } from 'react';
-import { baseURL } from '../../utils';
+import React, { useEffect, useRef, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+  Button,
+  Col,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+} from "reactstrap";
+import FullButton from "../buttons/FullButton";
+import ProfilePic from "./ProfilePic";
+import { baseURL } from "../environments";
 
-export default function EditProfile(props) {
-  const [user, setUser] = useState([]);
+function EditProfile(props) {
+  const usernameRef = useRef();
+  const emailRef = useRef();
+  const locationZipRef = useRef();
+  const activityBioRef = useRef();
+  const { id } = useParams();
+
+  const url = `${baseURL}/${id}/edit`;
+
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [locationZip, setLocationZip] = useState("");
+  const [activityBio, setActivityBio] = useState("");
+
+  const navigate = useNavigate();
+
   const fetchUser = async () => {
-    const url = `${baseURL}/profile`;
-
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        method: "GET",
+        headers: new Headers({
+          Authorization: props.token,
+        }),
+      });
+
       const data = await res.json();
 
-      // console.log(data);
-      setUser(data.getProfile);
+      console.log(data);
+
+      const { username, email, locationZip, activityBio } = data.getUser;
+
+      setUsername(username);
+      setEmail(email);
+      setLocationZip(locationZip);
+      setActivityBio(activityBio);
     } catch (err) {
       console.error(err.message);
     }
@@ -30,98 +57,132 @@ export default function EditProfile(props) {
   useEffect(() => {
     if (props.token) {
       fetchUser();
+    } else {
+      return (
+        <div>
+          <p>Please log in to edit your profile.</p>
+        </div>
+      );
     }
-  }, [props.token]);
+  });
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    let bodyObj = JSON.stringify({
+      username: username,
+      email: email,
+      locationZip: locationZip,
+      activityBio: activityBio,
+    });
+
+    const requestOptions = {
+      headers: new Headers({
+        Authorization: props.token,
+        "Content-Type": "application/json",
+      }),
+      body: bodyObj,
+      method: "PATCH",
+    };
+
+    try {
+      const res = await fetch(url, requestOptions);
+      const data = await res.json();
+
+      console.log(data);
+      alert(`${data.message}`);
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  const style = {
+    margin: ".5rem",
+    marginTop: "10px",
+    marginBottom: "5px",
+    backgroundColor: "#D9D9D9",
+    color: "#3C6E71",
+    borderColor: "#3C6E71",
+  };
 
   return (
-    <div className="userProfile">
-      <section style={{ backgroundColor: "#fff0f5" }}>
-        <MDBContainer className="py-5">
-          <MDBRow>
-            <MDBCol lg="4">
-              <MDBCard className="mb-4">
-                <MDBCardBody className="text-center">
-                  <MDBCardImage
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                    alt="avatar"
-                    className="rounded-circle"
-                    style={{ width: "150px" }}
-                    fluid
-                  />
-                  <p className="text-muted mb-1">Full Stack Developer</p>
-                  <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                  <div className="d-flex justify-content-center mb-2">
-                    <MDBBtn>Edit</MDBBtn>
-                    <MDBBtn outline className="ms-3">
-                      Delete
-                    </MDBBtn>
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-            <MDBCol lg="8">
-              <MDBCard className="mb-4">
-                <MDBCardBody>
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Johnatan Smith
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Email</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        example@example.com
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Phone</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (097) 234-5678
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Mobile</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (098) 765-4321
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Bay Area, San Francisco, CA
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-      </section>
-    </div>
+    <>
+      <h2
+        style={{
+          color: "#284B63",
+          textAlign: "center",
+          textDecoration: "underline",
+          textShadow: "3px 3px 3px #D9D9D9",
+        }}
+      >
+        <strong>Edit Profile</strong>
+      </h2>
+      <br />
+      <Container>
+        <Row>
+          <Col md="4">
+            <FullButton>
+              <Button onClick={() => navigate("/profile")}>
+                Back to Profile Home
+              </Button>
+            </FullButton>
+          </Col>
+          <Col md="8">
+            <ProfilePic />
+            <Form onSubmit={handleSubmit}>
+              <FormGroup>
+                <Label>Username</Label>
+                <Input
+                  value={username}
+                  innerRef={usernameRef}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label>Email</Label>
+                <Input
+                  type="email"
+                  value={email}
+                  innerRef={emailRef}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></Input>
+              </FormGroup>
+              <FormGroup>
+                <Label>Location Zip Code</Label>
+                <Input
+                  type="text"
+                  pattern="[0-9]{5}"
+                  maxLength={5}
+                  value={locationZip}
+                  innerRef={locationZipRef}
+                  onChange={(e) => setLocationZip(e.target.value)}
+                ></Input>
+              </FormGroup>
+              <FormGroup>
+                <Label>Activity Bio</Label>
+                <p style={{ fontSize: "small", text: "muted" }}>
+                  This will be seen by people you are matched with, so add your
+                  favorite fitness activites here!
+                </p>
+                <Input
+                  type="text"
+                  maxLength={30}
+                  value={activityBio}
+                  innerRef={activityBioRef}
+                  onChange={(e) => setActivityBio(e.target.value)}
+                />
+              </FormGroup>
+              <FullButton>
+                <Button type="submit" style={style}>
+                  <strong>Update</strong>
+                </Button>
+              </FullButton>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
+
+export default EditProfile;
