@@ -15,7 +15,7 @@ import ProfilePic from "./ProfilePic";
 // import { baseURL } from "../environments";
 
 function EditProfile(props) {
-  const { userId } = useParams();
+  // const { userId } = useParams();
   const usernameRef = useRef();
   const emailRef = useRef();
   const locationZipRef = useRef();
