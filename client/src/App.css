@@ -50,15 +50,7 @@
   align-items: center;
 }
 
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #01161E;
-  color: white;
-  text-align: center;
-}
+
 
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
@@ -71,6 +63,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  z-index: 1;
 }
 
 /* Style the links inside the navigation bar */
@@ -116,6 +109,23 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
  
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  color: #124559;
+  text-align: center;
+  font-size: 10px;
+  padding: 5px;
+}
+
+.footer h2 {
+  font-size: 16px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 /* color palette: 
