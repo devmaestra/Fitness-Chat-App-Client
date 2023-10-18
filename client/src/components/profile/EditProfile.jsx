@@ -15,7 +15,7 @@ import ProfilePic from "./ProfilePic";
 import { baseURL } from "../environments";
 
 function EditProfile(props) {
-  // const { userId } = useParams();
+  const { user } = useParams();
   const usernameRef = useRef();
   const emailRef = useRef();
   const locationZipRef = useRef();
@@ -97,6 +97,29 @@ function EditProfile(props) {
     }
   }
 
+  async function deleteUser(id) {
+    const url = `${baseURL}/user/${id}`;
+
+    console.log(url);
+
+    let requestOption = {
+      headers: new Headers({
+        Authorization: props.token,
+      }),
+      method: "DELETE",
+    };
+
+  //   try {
+  //     let res = await fetch(url, requestOption);
+  //     let data = await res.json();
+
+  //     if (data) {
+  //       props.fetchUser();
+  //     }
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // }
   const style = {
     margin: ".5rem",
     marginTop: "10px",
@@ -180,6 +203,9 @@ function EditProfile(props) {
               </Button>
             </FullButton>
           </Col>
+          <Button onClick={() => deleteUser(user._id)} color="danger">
+            Delete My Account
+          </Button>
         </Row>
       </Container>
     </>
