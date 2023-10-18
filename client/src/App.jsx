@@ -1,21 +1,21 @@
-import './App.css';
-import React, { useState, useEffect } from 'react';
-import Header from './components/header/Header';
-import Nav from './components/nav/Nav';
-import Auth from './components/auth/Auth';
-import Matches from './components/matches/Matches';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import Header from "./components/header/Header";
+import Nav from "./components/nav/Nav";
+import Auth from "./components/auth/Auth";
+import Matches from "./components/matches/Matches";
 import Profile from "./components/profile/Profile";
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from "react-router-dom";
 import ConversationTable from "./components/conversations/ConversationTable";
-import { baseURL } from './components/environments/index';
+import { baseURL } from "./components/environments/index";
 import EditProfile from "./components/profile/EditProfile";
-    
+
 function App() {
-  const [sessionToken, setSessionToken] = useState('');
+  const [sessionToken, setSessionToken] = useState("");
   const [userData, setUserData] = useState(null);
 
-  const updateToken = newToken => {
-    localStorage.setItem('token', newToken);
+  const updateToken = (newToken) => {
+    localStorage.setItem("token", newToken);
 
     setSessionToken(newToken);
   };
@@ -23,15 +23,16 @@ function App() {
   const fetchUserData = async () => {
     try {
       const response = await fetch(`${baseURL}/user/loggeduser`, {
-
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: sessionToken,
         },
       });
 
       if (!response.ok) {
-        throw new Error(`Failed to fetch user data. Status: ${response.status}`);
+        throw new Error(
+          `Failed to fetch user data. Status: ${response.status}`
+        );
       }
 
       const data = await response.json();
@@ -42,17 +43,17 @@ function App() {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
-      setSessionToken(localStorage.getItem('token'));
+    if (localStorage.getItem("token")) {
+      setSessionToken(localStorage.getItem("token"));
 
       fetchUserData()
-        .then(userData => {
+        .then((userData) => {
           if (userData) {
             setUserData(userData);
           }
         })
-        .catch(error => {
-          console.error('Error fetching user data:', error);
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
         });
     }
   }, []);
