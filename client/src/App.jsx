@@ -66,7 +66,7 @@ function App() {
         <Route path="/profile" element={<Profile token={sessionToken} />} />
         <Route
           path="/profile/edit-profile"
-          component={<EditProfile token={sessionToken} />}
+          element={<EditProfile token={sessionToken} />}
         />
         <Route
           path="/myconversations"
