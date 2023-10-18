@@ -12,7 +12,7 @@ import {
 } from "reactstrap";
 import FullButton from "../buttons/FullButton";
 import ProfilePic from "./ProfilePic";
-// import { baseURL } from "../environments";
+import { baseURL } from "../environments";
 
 function EditProfile(props) {
   // const { userId } = useParams();
@@ -21,8 +21,8 @@ function EditProfile(props) {
   const locationZipRef = useRef();
   const activityBioRef = useRef();
   // const { id } = useParams();
-
-  const url = `http://localhost:4001/user/edit`;
+  console.log(props);
+  const url = `${baseURL}/user/edit`;
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -65,7 +65,7 @@ function EditProfile(props) {
         </div>
       );
     }
-  });
+  }, [props.token]);
 
   async function handleSubmit(e) {
     e.preventDefault();
