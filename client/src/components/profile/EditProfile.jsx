@@ -109,17 +109,18 @@ function EditProfile(props) {
       method: "DELETE",
     };
 
-  //   try {
-  //     let res = await fetch(url, requestOption);
-  //     let data = await res.json();
+    // try {
+    //   let res = await fetch(url, requestOption);
+    //   let data = await res.json();
 
-  //     if (data) {
-  //       props.fetchUser();
-  //     }
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // }
+    //   if (data) {
+    //     props.fetchUser();
+    //   }
+    // } catch (err) {
+    //   console.error(err.message);
+    // }
+
+  }
   const style = {
     margin: ".5rem",
     marginTop: "10px",
