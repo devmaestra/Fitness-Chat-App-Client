@@ -109,17 +109,18 @@ function EditProfile(props) {
       method: "DELETE",
     };
 
-  //   try {
-  //     let res = await fetch(url, requestOption);
-  //     let data = await res.json();
+    try {
+      let res = await fetch(url, requestOption);
+      let data = await res.json();
 
-  //     if (data) {
-  //       props.fetchUser();
-  //     }
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // }
+      if (data) {
+        props.fetchUser();
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
   const style = {
     margin: ".5rem",
     marginTop: "10px",
@@ -196,13 +197,11 @@ function EditProfile(props) {
               </FullButton>
             </Form>
           </Col>
-          <Col md="4">
-            <FullButton>
-              <Button onClick={() => navigate("/profile")}>
-                Back to Profile Home
-              </Button>
-            </FullButton>
-          </Col>
+          <FullButton>
+            <Button onClick={() => navigate("/profile")}>
+              Back to Profile Home
+            </Button>
+          </FullButton>
           <Button onClick={() => deleteUser(user._id)} color="danger">
             Delete My Account
           </Button>
