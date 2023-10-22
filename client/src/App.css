@@ -15,7 +15,7 @@
   left: 0;
   top: 0;
   width: 100%;
-  background-color: #284B63;
+  background-color: #D9D9D9;
   color: white;
   text-align: center;
   margin: 0;
@@ -26,23 +26,37 @@
 .header h1 {
   margin: 0;
   padding: 0;
+  background-color: #D9D9D9;
 }
 
 .header p {
   margin: 0;
-  padding: 5px 0 10px 0;
-  background-color: #3C6E71;
+  padding: 15px 0 10px 0;
+  background-color: #284B63;
 }
 
-#fancyTitle {
+.h3 {
+  padding: 5px 0 5px 0;
+  background-color: #FF6F59;
+}
+.logo {
+  max-width: 15%; 
+  height: auto;    
+  display: block; 
+  margin: 0 auto; 
+  min-width: 15%;
+  padding: 5px;
+}
+
+/* #fancyTitle {
   font-family: 'Mr De Haviland', cursive;
   padding: 0;
   margin: 30px 0 10px 0;
   font-size: 6em;
   font-weight: 100;
   /* letter-spacing: .01em; */
-  line-height: 80%;
-}
+  /* line-height: 80%;
+/* } */ 
 
 .form-inline {
   width: 100%;
