@@ -8,6 +8,7 @@
 
 .container {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .header {
@@ -50,8 +51,6 @@
   align-items: center;
 }
 
-
-
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
   background-color: #3C6E71;
@@ -59,6 +58,7 @@
   position: fixed !important;
   bottom: 0;
   width: 100%;
+  height: 100px;
   /* Center the Nav Items */
   display: flex;
   align-items: center;
@@ -73,10 +73,29 @@
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
-  margin: 0rem 0.25rem; /* spacing between nav buttons */
+  margin: 0rem; /* spacing between nav buttons */
   text-decoration: none;
-  font-size: 17px;
+  font-size: 1.2rem; /* consider using vw */
   border-radius: 20px;
+  
+}
+/* 
+@media screen and (max-width: 345px) {
+  .navbar a {
+    font-size: 0.6vw
+  }
+} */
+
+@media screen and (max-width: 400px) {
+  .navbar a {
+    font-size: 2.5vw
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .navbar a {
+    font-size: 3vw
+  }
 }
 
 /* Change the color of links on hover */
@@ -109,6 +128,10 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
  
+}
+
+.lower-modal {
+  margin-top: 500px; /* Adjust this value to set the desired distance from the top */
 }
 
 .footer {
