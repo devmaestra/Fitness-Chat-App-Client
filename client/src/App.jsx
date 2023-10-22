@@ -4,10 +4,10 @@ import Header from "./components/header/Header";
 import Nav from "./components/nav/Nav";
 import Auth from "./components/auth/Auth";
 import Matches from "./components/matches/Matches";
-import Profile from "./components/profile/Profile";
 import { Route, Routes } from "react-router-dom";
 import ConversationTable from "./components/conversations/ConversationTable";
 import { baseURL } from "./components/environments/index";
+import Profile from "./components/profile/Profile";
 import EditProfile from "./components/profile/EditProfile";
 
 function App() {
@@ -36,6 +36,9 @@ function App() {
       }
 
       const data = await response.json();
+
+      console.log('Received userData:', data);
+      
       return data;
     } catch (error) {
       throw error;
@@ -49,6 +52,7 @@ function App() {
       fetchUserData()
         .then((userData) => {
           if (userData) {
+            console.log(userData);
             setUserData(userData);
           }
         })
@@ -64,10 +68,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth updateToken={updateToken} />} />
         <Route path="/matches" element={<Matches token={sessionToken} />} />
-        <Route path="/profile" element={<Profile token={sessionToken} />} />
+        <Route path="/profile" element={<Profile token={sessionToken} userData={userData} />} />
         <Route
           path="/profile/edit-profile"
-          element={<EditProfile token={sessionToken} />}
+          element={<EditProfile token={sessionToken} userData={userData} />} // Pass userData to EditProfile too if needed
         />
         <Route
           path="/myconversations"
