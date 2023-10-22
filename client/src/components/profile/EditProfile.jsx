@@ -1,108 +1,111 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import {
-  Button,
-  Col,
-  Container,
-  Form,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from "reactstrap";
 import FullButton from "../buttons/FullButton";
 import ProfilePic from "./ProfilePic";
 import { baseURL } from "../environments";
 
 function EditProfile(props) {
-  const { user } = useParams();
-  const usernameRef = useRef();
-  const emailRef = useRef();
-  const locationZipRef = useRef();
-  const activityBioRef = useRef();
-  // const { id } = useParams();
+  console.log('Profile component is rendering.');
   console.log(props);
-  const url = `${baseURL}/user/edit`;
+  // const { userData } = props; // Destructure userData from props
+  // const [token, setToken] = useState(localStorage.getItem('token') || '');
+  // console.log(userData);
+  const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [user, setUser] = useState(null);
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [locationZip, setLocationZip] = useState("");
   const [activityBio, setActivityBio] = useState("");
 
-  const navigate = useNavigate();
-
-  const fetchUser = async () => {
-    try {
-      const res = await fetch(url, {
-        method: "GET",
-        headers: new Headers({
-          Authorization: props.token,
-        }),
-      });
-
-      const data = await res.json();
-
-      console.log(data);
-
-      const { username, email, locationZip, activityBio } = data.getUser;
-
-      setUsername(username);
-      setEmail(email);
-      setLocationZip(locationZip);
-      setActivityBio(activityBio);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+    // Update the token state if it changes in local storage
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem('token');
+  //   if (storedToken && storedToken !== token) {
+  //     setToken(storedToken);
+  //   }
+  // }, [token]);
+  
 
   useEffect(() => {
-    if (props.token) {
-      fetchUser();
-    } else {
-      return (
-        <div>
-          <p>Please log in to edit your profile.</p>
-        </div>
-      );
+    // Fetch the logged-in user's data
+    fetchUserData();
+
+    async function fetchUserData() {
+      try {
+        const url = `${baseURL}/user/loggeduser`;
+
+        const res = await fetch(url, {
+          method: "GET",
+          headers: new Headers({
+            Authorization: props.token,
+          }),
+        });
+
+        if (res.status === 200) {
+          const data = await res.json();
+
+          // Update the form fields with user data
+          // console.log(data);
+          setUser(data);
+          setFirstName(data.firstName);
+          setLastName(data.lastName);
+          // setUsername(data.username);
+          // setEmail(data.email);
+          setLocationZip(data.locationZip);
+          setActivityBio(data.activityBio);
+        } else {
+          console.log("User data not found");
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
     }
   }, [props.token]);
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(user);
 
-    let bodyObj = JSON.stringify({
-      username: username,
-      email: email,
-      locationZip: locationZip,
-      activityBio: activityBio,
-    });
+    // const url = `${baseURL}/user/${userData._id}/edit`; // Make sure to update this URL
+    const url = `${baseURL}/user/${user._id}/edit`; // Make sure to update this URL
 
     const requestOptions = {
       headers: new Headers({
         Authorization: props.token,
         "Content-Type": "application/json",
       }),
-      body: bodyObj,
       method: "PATCH",
+      body: JSON.stringify({
+        // username,
+        // email,
+        locationZip,
+        activityBio,
+      }),
     };
 
     try {
       const res = await fetch(url, requestOptions);
       const data = await res.json();
 
-      console.log(data);
-      alert(`${data.message}`);
+      if (res.status === 200) {
+        console.log(data.message);
+        alert(`${data.message}`);
+      } else {
+        console.error(data.message);
+      }
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
 
-  async function deleteUser(id) {
-    const url = `${baseURL}/user/${id}`;
+  const handleDeleteProfile = async () => {
+    const url = `${baseURL}/user/${user._id}`;
 
-    console.log(url);
-
-    let requestOption = {
+    const requestOptions = {
       headers: new Headers({
         Authorization: props.token,
       }),
@@ -110,16 +113,21 @@ function EditProfile(props) {
     };
 
     try {
-      let res = await fetch(url, requestOption);
-      let data = await res.json();
+      const res = await fetch(url, requestOptions);
+      const data = await res.json();
 
-      if (data) {
-        props.fetchUser();
+      if (res.status === 200) {
+        console.log(data.message);
+        alert(`${data.message}`);
+        // Redirect or perform any other necessary actions after profile deletion
+        navigate("/"); // Example: Redirect to the login page
+      } else {
+        console.error(data.message);
       }
     } catch (err) {
       console.error(err.message);
     }
-  }
+  };
 
   const style = {
     margin: ".5rem",
@@ -132,38 +140,38 @@ function EditProfile(props) {
 
   return (
     <>
+      <Container>
+        {/* <Row> */}
+          {/* <Col md="6"> */}
       <h2
         style={{
           color: "#284B63",
           textAlign: "center",
-          textDecoration: "underline",
+          // textDecoration: "underline",
           textShadow: "3px 3px 3px #D9D9D9",
         }}
       >
         <strong>Edit Profile</strong>
       </h2>
       <br />
-      <Container>
-        <Row>
-          <Col md="8">
             <ProfilePic />
+            <br />
             <Form onSubmit={handleSubmit}>
               <FormGroup>
-                <Label>Username</Label>
+                <Label>First Name</Label>
                 <Input
-                  value={username}
-                  innerRef={usernameRef}
-                  onChange={(e) => setUsername(e.target.value)}
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
               </FormGroup>
               <FormGroup>
-                <Label>Email</Label>
+                <Label>Last Name</Label>
                 <Input
-                  type="email"
-                  value={email}
-                  innerRef={emailRef}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></Input>
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
               </FormGroup>
               <FormGroup>
                 <Label>Location Zip Code</Label>
@@ -172,21 +180,19 @@ function EditProfile(props) {
                   pattern="[0-9]{5}"
                   maxLength={5}
                   value={locationZip}
-                  innerRef={locationZipRef}
                   onChange={(e) => setLocationZip(e.target.value)}
-                ></Input>
+                />
               </FormGroup>
               <FormGroup>
-                <Label>Activity Bio</Label>
-                <p style={{ fontSize: "small", text: "muted" }}>
-                  This will be seen by people you are matched with, so add your
-                  favorite fitness activites here!
+                <Label>Activities</Label>
+                <p style={{ fontSize: "small", color: "muted" }}>
+                  (This will be seen by people you are matched with, so add your
+                  favorite fitness activities here!)
                 </p>
                 <Input
                   type="text"
                   maxLength={30}
                   value={activityBio}
-                  innerRef={activityBioRef}
                   onChange={(e) => setActivityBio(e.target.value)}
                 />
               </FormGroup>
@@ -196,16 +202,16 @@ function EditProfile(props) {
                 </Button>
               </FullButton>
             </Form>
-          </Col>
           <FullButton>
             <Button onClick={() => navigate("/profile")}>
               Back to Profile Home
             </Button>
           </FullButton>
-          <Button onClick={() => deleteUser(user._id)} color="danger">
+          <Button onClick={handleDeleteProfile} color="danger">
             Delete My Account
           </Button>
-        </Row>
+          {/* </Col> */}
+        {/* </Row> */}
       </Container>
     </>
   );

@@ -47,7 +47,7 @@ function Signup(props) {
 
       if (data.message === "Success!") {
         props.updateToken(data.token);
-        navigate("/");
+        navigate("/matches");
       } else {
         alert(data.message);
       }
