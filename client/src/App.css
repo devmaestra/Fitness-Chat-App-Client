@@ -67,7 +67,7 @@
 
 /* Place the navbar at the bottom of the page, and make it stick */
 .navbar {
-  background-color: #3C6E71;
+  background-color: #284B63;
   overflow: hidden;
   position: fixed !important;
   bottom: 0;
@@ -76,8 +76,9 @@
   /* Center the Nav Items */
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
   z-index: 1;
+
 }
 
 /* Style the links inside the navigation bar */
@@ -114,14 +115,16 @@
 
 /* Change the color of links on hover */
 .navbar a:hover {
-  background-color: #b4eaff;
+  background-color: #D9D9D9;
   color: #284B63;
 }
 
 /* Add a color to the active/current link */
 .navbar a.active {
-  background-color: #124559;
+  background-color: #FF6F59;
   color: #D9D9D9;
+  margin: .5px;
+  padding: .5em;
 }
 
 .card-image {
@@ -167,7 +170,6 @@
 
 /* color palette: 
 Dark brown/gray: #353535
-Green: #3C6E71
 White: #FFFFFF
 light Gray: #D9D9D9
 Blue: #284B63
