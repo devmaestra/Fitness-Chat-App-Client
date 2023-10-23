@@ -5,7 +5,6 @@ import { baseURL } from "../../utils";
 import CardTemplate from "../card/CardTemplate";
 import { useNavigate } from "react-router-dom";
 
-
 let userName;
 let userId;
 let userZip;
@@ -14,9 +13,8 @@ function Matches(props) {
   const [matchedUsers, setMatchedUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState(null); // To store the selected user
   const [showCreateButton, setShowCreateButton] = useState(false);
-  
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
   // Define the fetchMatches function
   const fetchMatches = async () => {
@@ -48,13 +46,11 @@ function Matches(props) {
   };
 
   // Function to handle creating a new conversation or using an existing one
-const createConversation = async () => {
-  if (selectedUserId) {
-    try {
-      // Check if a conversation already exists between the two users
-      const response = await axios.get(
-        `${baseURL}/conversation/byusers`,
-        {
+  const createConversation = async () => {
+    if (selectedUserId) {
+      try {
+        // Check if a conversation already exists between the two users
+        const response = await axios.get(`${baseURL}/conversation/byusers`, {
           params: {
             user1: userId,
             user2: selectedUserId,
@@ -62,58 +58,63 @@ const createConversation = async () => {
           headers: {
             Authorization: `${props.token}`,
           },
-        }
-      );
+        });
 
-      console.log("Response from checking existing conversation:", response.data);
-
-      if (response.data && response.data.conversation) {
-        // An existing conversation was found, you can use it for further actions
-        console.log("Using an existing conversation:", response.data.conversation);
-
-        // Handle any further actions here, such as redirecting to the conversation page.
-        navigate('/myconversations');
-
-        // Clear the selected user and hide the "Create Convo" button
-        setSelectedUserId(null);
-        setShowCreateButton(false);
-      } else {
-        // Create the title by concatenating usernames
-        const title = `${userName} with ${
-          matchedUsers.find((user) => user._id === selectedUserId).username
-        }`;
-
-        // Make the POST request to create the conversation
-        const response = await axios.post(
-          `${baseURL}/conversation`,
-          {
-            title,
-            users: [userId, selectedUserId],
-          },
-          {
-            headers: {
-              Authorization: `${props.token}`,
-            },
-          }
+        console.log(
+          "Response from checking existing conversation:",
+          response.data
         );
 
-        console.log("Response from creating conversation:", response.data);
+        if (response.data && response.data.conversation) {
+          // An existing conversation was found, you can use it for further actions
+          console.log(
+            "Using an existing conversation:",
+            response.data.conversation
+          );
 
-        // Handle any further actions here, such as redirecting to the new conversation page.
-        navigate('/myconversations');
+          // Handle any further actions here, such as redirecting to the conversation page.
+          navigate("/myconversations");
 
-        // Clear the selected user and hide the "Create Convo" button
-        setSelectedUserId(null);
-        setShowCreateButton(false);
+          // Clear the selected user and hide the "Create Convo" button
+          setSelectedUserId(null);
+          setShowCreateButton(false);
+        } else {
+          // Create the title by concatenating usernames
+          const title = `${userName} with ${
+            matchedUsers.find((user) => user._id === selectedUserId).username
+          }`;
+
+          // Make the POST request to create the conversation
+          const response = await axios.post(
+            `${baseURL}/conversation`,
+            {
+              title,
+              users: [userId, selectedUserId],
+            },
+            {
+              headers: {
+                Authorization: `${props.token}`,
+              },
+            }
+          );
+
+          console.log("Response from creating conversation:", response.data);
+
+          // Handle any further actions here, such as redirecting to the new conversation page.
+          navigate("/myconversations");
+
+          // Clear the selected user and hide the "Create Convo" button
+          setSelectedUserId(null);
+          setShowCreateButton(false);
+        }
+      } catch (error) {
+        console.error("Error creating or checking conversation:", error);
+
+        // Navigate to the /myconversations route when an error occurs
+        navigate("/myconversations");
       }
-    } catch (error) {
-      console.error("Error creating or checking conversation:", error);
-
-      // Navigate to the /myconversations route when an error occurs
-      navigate('/myconversations');
     }
-  }
-};
+  };
 
   useEffect(() => {
     // Call the fetchMatches function when the component mounts
@@ -134,7 +135,7 @@ const createConversation = async () => {
       </h1>
       <br />
       <Button
-        style={{ background: "#3C6E71", boxShadow: "1px 1px 10px 1px grey" }}
+        style={{ background: "#284B63", boxShadow: "1px 1px 10px 1px grey" }}
         size="lg"
         onClick={fetchMatches}
       >
@@ -155,19 +156,16 @@ const createConversation = async () => {
             onCreateConvoClick={() => createConversation(user)}
             onCancelClick={() => selectUser(null)} // This cancels the selection
             activityBio={user.activityBio} //add to user signup?
-            
           />
         ))}
       </div>
       {selectedUserId && (
         <div>
-          
           {/* <h3>
             Selected User:{" "}
             {matchedUsers.find((user) => user._id === selectedUserId).username}
           </h3>
           <button onClick={() => setSelectedUserId(null)}>Cancel</button> */}
-
         </div>
       )}
     </div>

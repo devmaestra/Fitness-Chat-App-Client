@@ -9,6 +9,7 @@ import ConversationTable from "./components/conversations/ConversationTable";
 import { baseURL } from "./components/environments/index";
 import Profile from "./components/profile/Profile";
 import EditProfile from "./components/profile/EditProfile";
+import LoggedOut from "./components/auth/logout/LoggedOut";
 
 function App() {
   const [sessionToken, setSessionToken] = useState("");
@@ -37,8 +38,8 @@ function App() {
 
       const data = await response.json();
 
-      console.log('Received userData:', data);
-      
+      console.log("Received userData:", data);
+
       return data;
     } catch (error) {
       throw error;
@@ -68,7 +69,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Auth updateToken={updateToken} />} />
         <Route path="/matches" element={<Matches token={sessionToken} />} />
-        <Route path="/profile" element={<Profile token={sessionToken} userData={userData} />} />
+        <Route
+          path="/profile"
+          element={<Profile token={sessionToken} userData={userData} />}
+        />
         <Route
           path="/profile/edit-profile"
           element={<EditProfile token={sessionToken} userData={userData} />} // Pass userData to EditProfile too if needed
@@ -79,6 +83,7 @@ function App() {
             <ConversationTable token={sessionToken} userData={userData} />
           }
         />
+        <Route path="/signed-out" element={<LoggedOut />} />
       </Routes>
       {sessionToken !== "" ? <Nav /> : null}
       <Nav setSessionToken={setSessionToken} />
