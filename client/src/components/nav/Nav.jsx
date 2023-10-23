@@ -11,12 +11,10 @@ import {
   // faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import Logout from '../auth/logout/Logout'; // Import the Logout component
-import { NavLink } from 'react-router-dom';
-
+import Logout from "../auth/logout/Logout"; // Import the Logout component
+import { NavLink } from "react-router-dom";
 
 function Nav({ setSessionToken }) {
-
   // const navigate = useNavigate();
 
   // const handleMyConvosClick = () => {
@@ -28,28 +26,31 @@ function Nav({ setSessionToken }) {
     <div className="navbar">
       <NavLink to="/" exact="true" activeclassname="active">
         <FontAwesomeIcon icon={faHome} />
-        <br />Home
+        <br />
+        Home
       </NavLink>
       <NavLink to="/matches" activeclassname="active">
         <FontAwesomeIcon icon={faUsers} />
-        <br />Matches
+        <br />
+        Matches
       </NavLink>
       <NavLink to="/myconversations" activeclassname="active">
         <FontAwesomeIcon icon={faComments} />
-        <br />Convos
+        <br />
+        Convos
       </NavLink>
       <NavLink to="/profile" activeclassname="active">
         <FontAwesomeIcon icon={faUser} />
-        <br />Profile
+        <br />
+        Profile
       </NavLink>
       {setSessionToken ? (
-        <NavLink to="/" activeclassname="active">
+        <NavLink to="/signed-out" activeclassname="active">
           <Logout setSessionToken={setSessionToken} />
         </NavLink>
       ) : null}
     </div>
   );
 }
-
 
 export default Nav;
