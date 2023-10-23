@@ -61,8 +61,8 @@ function Signup(props) {
     marginTop: "10px",
     marginBottom: "5px",
     backgroundColor: "#D9D9D9",
-    color: "#3C6E71",
-    borderColor: "#3C6E71",
+    color: "#284B63",
+    borderColor: "#284B63",
   };
 
   return (
