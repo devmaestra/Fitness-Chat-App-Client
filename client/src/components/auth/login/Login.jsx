@@ -4,7 +4,6 @@ import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
 function Login({ updateToken }) {
-
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -13,10 +12,8 @@ function Login({ updateToken }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
 
     //needs to match postman body
     let body = JSON.stringify({
@@ -47,7 +44,6 @@ function Login({ updateToken }) {
       } else {
         alert(data.message);
       }
-
     } catch (err) {
       console.log(err.message);
     }
@@ -58,8 +54,8 @@ function Login({ updateToken }) {
     marginTop: "10px",
     marginBottom: "5px",
     backgroundColor: "#D9D9D9",
-    color: "#3C6E71",
-    borderColor: "#3C6E71",
+    color: "#284B63",
+    borderColor: "#284B63",
   };
 
   return (
