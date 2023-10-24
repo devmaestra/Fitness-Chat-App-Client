@@ -20,6 +20,8 @@ function EditProfile(props) {
   const [lastName, setLastName] = useState("");
   const [locationZip, setLocationZip] = useState("");
   const [activityBio, setActivityBio] = useState("");
+  const [userImage, setUserImage] = useState("")
+  const [imgURL, setImgURL] = useState("")
 
     // Update the token state if it changes in local storage
   // useEffect(() => {
@@ -28,35 +30,68 @@ function EditProfile(props) {
   //     setToken(storedToken);
   //   }
   // }, [token]);
+
+  //AWS UPDATE PROFILE PIC!
+  // const handlePicUpload = async (e) => {
+  //   e.preventDefault();
+  
+  //   const url = `${baseURL}/user/${user._id}/edit`;
+  
+  //   const requestOptions = {
+  //     headers: new Headers({
+  //       Authorization: props.token,
+  //       "Content-Type": "application/json",
+  //     }),
+  //     method: "PATCH",
+  //     body: JSON.stringify({
+  //       userImage: imgURL,
+  //     }),
+  //   };
+  
+  //   try {
+  //     const res = await fetch(url, requestOptions);
+  //     const data = await res.json();
+  
+  //     if (res.status === 200) {
+  //       // Update userImage state on successful update
+  //       setUserImage(imgURL);
+  //       console.log("Profile picture updated successfully");
+  //     } else {
+  //       console.error(data.message);
+  //     }
+  //   } catch (err) {
+  //     console.error(err.message);
+  //   }
+  // };
+  
+  //AWS UPDATE PROFILE PIC ENDS*
   
 
   useEffect(() => {
     // Fetch the logged-in user's data
     fetchUserData();
-
+  
     async function fetchUserData() {
       try {
         const url = `${baseURL}/user/loggeduser`;
-
+  
         const res = await fetch(url, {
           method: "GET",
           headers: new Headers({
             Authorization: props.token,
           }),
         });
-
+  
         if (res.status === 200) {
           const data = await res.json();
-
+  
           // Update the form fields with user data
-          // console.log(data);
           setUser(data);
           setFirstName(data.firstName);
           setLastName(data.lastName);
-          // setUsername(data.username);
-          // setEmail(data.email);
           setLocationZip(data.locationZip);
           setActivityBio(data.activityBio);
+          setUserImage(data.userImage); // Update to use userImage
         } else {
           console.log("User data not found");
         }
@@ -65,14 +100,13 @@ function EditProfile(props) {
       }
     }
   }, [props.token]);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(user);
-
-    // const url = `${baseURL}/user/${userData._id}/edit`; // Make sure to update this URL
-    const url = `${baseURL}/user/${user._id}/edit`; // Make sure to update this URL
-
+  
+    const url = `${baseURL}/user/${user._id}/edit`;
+  
     const requestOptions = {
       headers: new Headers({
         Authorization: props.token,
@@ -80,17 +114,15 @@ function EditProfile(props) {
       }),
       method: "PATCH",
       body: JSON.stringify({
-        // username,
-        // email,
         locationZip,
         activityBio,
       }),
     };
-
+  
     try {
       const res = await fetch(url, requestOptions);
       const data = await res.json();
-
+  
       if (res.status === 200) {
         console.log(data.message);
         alert(`${data.message}`);
@@ -154,7 +186,14 @@ function EditProfile(props) {
         <strong>Edit Profile</strong>
       </h2>
       <br />
-            <ProfilePic />
+      <ProfilePic
+          userId={user ? user._id : null} // Pass user ID to ProfilePic
+          token={props.token}
+        />
+        {userImage && <img src={userImage} alt="Profile" style={{ maxWidth: '100%', maxHeight: '200px' }} />}
+      {/* <ProfilePic userId={user._id} token={props.token} /> */}
+
+
             <br />
             <Form onSubmit={handleSubmit}>
               <FormGroup>
