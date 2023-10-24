@@ -31,7 +31,7 @@ function CardTemplate({
             className="shadow-4"
             style={{
               margin: "10px",
-              background: "#D9D9D9",
+              background: "#ffffff",
               boxShadow: "0 2px 15px -3px",
             }}
           >

@@ -45,7 +45,7 @@ function Profile(props) {
           // Include any other properties from your user data
         />
       )}
-      <br />
+      {/* <br /> */}
       <Link to="/profile/edit-profile">
         <Button color="primary" >Edit Profile</Button>
       </Link>
