@@ -214,7 +214,7 @@ const [errorModalMessage, setErrorModalMessage] = useState('');
         </tbody>
       </Table>
 
-      <Modal isOpen={isModalOpen} toggle={closeModal}>
+      <Modal centered isOpen={isModalOpen} toggle={closeModal}>
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <div className="modal-header">
