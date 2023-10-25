@@ -22,49 +22,6 @@ function EditProfile(props) {
   const [activityBio, setActivityBio] = useState("");
   const [userImage, setUserImage] = useState("")
   const [imgURL, setImgURL] = useState("")
-
-    // Update the token state if it changes in local storage
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem('token');
-  //   if (storedToken && storedToken !== token) {
-  //     setToken(storedToken);
-  //   }
-  // }, [token]);
-
-  //AWS UPDATE PROFILE PIC!
-  // const handlePicUpload = async (e) => {
-  //   e.preventDefault();
-  
-  //   const url = `${baseURL}/user/${user._id}/edit`;
-  
-  //   const requestOptions = {
-  //     headers: new Headers({
-  //       Authorization: props.token,
-  //       "Content-Type": "application/json",
-  //     }),
-  //     method: "PATCH",
-  //     body: JSON.stringify({
-  //       userImage: imgURL,
-  //     }),
-  //   };
-  
-  //   try {
-  //     const res = await fetch(url, requestOptions);
-  //     const data = await res.json();
-  
-  //     if (res.status === 200) {
-  //       // Update userImage state on successful update
-  //       setUserImage(imgURL);
-  //       console.log("Profile picture updated successfully");
-  //     } else {
-  //       console.error(data.message);
-  //     }
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
-  
-  //AWS UPDATE PROFILE PIC ENDS*
   
 
   useEffect(() => {
@@ -186,13 +143,11 @@ function EditProfile(props) {
         <strong>Edit Profile</strong>
       </h2>
       <br />
+      {userImage && <img src={userImage} alt="Profile" style={{ maxWidth: '100%', maxHeight: '200px', padding: '10px' }} />}
       <ProfilePic
           userId={user ? user._id : null} // Pass user ID to ProfilePic
           token={props.token}
         />
-        {userImage && <img src={userImage} alt="Profile" style={{ maxWidth: '100%', maxHeight: '200px' }} />}
-      {/* <ProfilePic userId={user._id} token={props.token} /> */}
-
 
             <br />
             <Form onSubmit={handleSubmit}>
