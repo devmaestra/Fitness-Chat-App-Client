@@ -1,3 +1,207 @@
 .App {
   text-align: center;
+  /* padding-top: 25vw; */
+  padding-bottom: 100px;
+  background-color: #FFFFFF;
+  margin-bottom: 20px;
+}
+
+.header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #D9D9D9;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+  background-color: #D9D9D9;
+}
+
+.header p {
+  margin: 0;
+  padding: 15px 0 10px 0;
+  background-color: #284B63;
+}
+
+.h3 {
+  padding: 5px 0 5px 0;
+  background-color: #FF6F59;
+}
+
+.logo {
+  max-width: 15%; 
+  height: auto;    
+  display: block; 
+  margin: 0 auto; 
+  min-width: 15%;
+  padding: 5px;
+}
+
+.form-inline {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar {
+  background-color: #284B63;
+  overflow: hidden;
+  position: fixed !important;
+  bottom: 0;
+  width: 100%;
+  max-height: 80px;
+  height: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 1;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  margin: 0rem;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 12px;
+  max-height: 68px;
+}
+
+@media screen and (max-width: 400px) {
+  .navbar a {
+    font-size: 2.5vw;
+    border-radius: 7px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .navbar a {
+    font-size: 3vw;
+    border-radius: 10px;
+  }
+}
+
+.navbar a:hover {
+  background-color: #D9D9D9;
+  color: #284B63;
+}
+
+.navbar a.active {
+  background-color: #FF6F59;
+  color: #ffffff;
+  margin: .5px;
+  padding: .5em;
+}
+
+.card-image {
+  width: 150px;
+  margin: auto;
+}
+
+.card-container {
+  margin: 5px;
+  margin-right: 0;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.lower-modal {
+  margin-top: 500px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  color: #124559;
+  text-align: center;
+  font-size: 10px;
+  padding: 5px;
+}
+
+.footer h2 {
+  font-size: 16px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Additional Styles for Responsiveness */
+@media screen and (max-width: 2100px) {
+  .App {
+    padding-top: 15vw;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .App {
+    padding-top: 18vw;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .App {
+    padding-top: 20vw;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .App {
+    padding-top: 21vw;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .App {
+    padding-top: 24vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .App {
+    padding-top:26vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .App {
+    padding-top:30vw;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .App {
+    padding-top:30vw;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .App {
+    padding-top: 32vw;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .App {
+    padding-top: 40vw;
+  }
+}
+
+@media screen and (max-width: 220px) {
+  .App {
+    padding-top: 10vw;
+  }
 }
